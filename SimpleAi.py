@@ -10,7 +10,7 @@ class Player():
 class Ai(Player):
 	def __init__(self):
 		super(Ai, self).__init__()
-		self.name = ' '.join([chr(random.randrange(100)) for x in range(4)])
+		self.name = ' '.join([chr(random.randrange(100)) for x in range(2)])
 		self.array = {}
 		
 
@@ -73,7 +73,7 @@ class GameofSticks():
 			try:
 				picks = int(input("How many sticks you want to pick? "))
 				self.numSticks -= picks
-				print("{} picked {} sticks, There are {} sticks left..".format(getattr(currentPlayer, "name"), picks ,self.numSticks))
+				print("{} picked {} sticks, There are {} sticks left..\n\n".format(getattr(currentPlayer, "name"), picks ,self.numSticks))
 				currentPlayer = next(gen)
 			except ValueError as e:
 				print("Please choose between 1-3 sticks")
@@ -118,13 +118,13 @@ class GameofSticks():
 		while self.winner(currentPlayer) != True:
 			try:
 				if type(currentPlayer) == Player:
-					picks = int(input("How many sticks you want to pick? "))
+					picks = int(input("How many sticks you want to pick? \n"))
 				else:
 					picks = self.history[self.numSticks - 1][random.randrange(len(self.history[self.numSticks - 1]))]
 					currentPlayer.array[str(self.numSticks - 1)] = picks
 				self.numSticks -= picks
 				if not train:
-					print("{} picked {} sticks, There are {} sticks left..".format(getattr(currentPlayer, "name"), picks ,self.numSticks))
+					print("{} picked {} sticks, There are {} sticks left..\n".format(getattr(currentPlayer, "name"), picks ,self.numSticks))
 				currentPlayer = next(gen)
 			except ValueError as e:
 				print("Please choose between 1-3 sticks")
